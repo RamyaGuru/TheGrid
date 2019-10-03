@@ -1,0 +1,1828 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     64748,       1819]
+NotebookOptionsPosition[     60982,       1692]
+NotebookOutlinePosition[     61565,       1713]
+CellTagsIndexPosition[     61522,       1710]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ StyleBox["Standardized Routine for Experimental Data Extraction\n",
+  FontSize->36],
+ StyleBox["Thermoelectrics Design Lab (TEDL)",
+  FontSize->24,
+  FontColor->RGBColor[0, 0, 1]],
+ StyleBox["\n",
+  FontSize->24,
+  FontColor->GrayLevel[0]],
+ StyleBox["For questions, comments, and corrections please email Eric Toberer \
+(etoberer@mines.edu)",
+  FontSize->18,
+  FontColor->GrayLevel[0]]
+}], "Title",
+ CellChangeTimes->{{3.647108237479816*^9, 3.647108341690353*^9}, {
+  3.647605092824621*^9, 3.647605097966601*^9}, {3.647605131491611*^9, 
+  3.647605167929945*^9}, {3.647605393198942*^9, 3.6476054285812798`*^9}},
+ TextAlignment->Center,
+ Background->GrayLevel[0.85]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["",
+ FontSize->24]], "Section",
+ CellChangeTimes->{{3.6471076729785967`*^9, 3.647107680497096*^9}, 
+   3.647605330989894*^9}],
+
+Cell[BoxData[
+ RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.6293149268173723`*^9, 3.629314929659721*^9}, {
+   3.629383314072918*^9, 3.629383314436288*^9}, 3.629383350018115*^9, 
+   3.647092961631143*^9},
+ FontSize->14],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"DataPrinter", "[", "go_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"go", "\[Equal]", "1"}], ",", 
+       RowBox[{"Print", "[", 
+        RowBox[{"Column", "[", 
+         RowBox[{
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"StringForm", "[", "\[IndentingNewLine]", 
+             RowBox[{"\"\<The chemical potential:                ``\>\"", ",", 
+              RowBox[{"NumberForm", "[", 
+               RowBox[{"\[Eta]Calc", ",", "3"}], "]"}]}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"StringForm", "[", "\[IndentingNewLine]", 
+             RowBox[{
+             "\"\<The Lorenz number is:                  `` W \[CapitalOmega] \
+\!\(\*SuperscriptBox[\(K\), \(-2\)]\)\>\"", ",", 
+              RowBox[{"NumberForm", "[", 
+               RowBox[{"LCalc", ",", "4"}], "]"}]}], "]"}], ",", 
+            "\"\<Thermal conductivity components:\>\"", ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"StringForm", "[", 
+             RowBox[{
+             "\"\<  Total thermal conductivity:          ``    W/m K\>\"", 
+              ",", 
+              RowBox[{"NumberForm", "[", 
+               RowBox[{"\[Kappa]Exp", ",", "4"}], "]"}]}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"StringForm", "[", 
+             RowBox[{
+             "\"\<  Electronic contribution:             ``    W/m K\>\"", 
+              ",", 
+              RowBox[{"NumberForm", "[", 
+               RowBox[{"\[Kappa]EleCalc", ",", "4"}], "]"}]}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"StringForm", "[", 
+             RowBox[{
+             "\"\<  Lattice contribution:                ``     W/m K\>\"", 
+              ",", 
+              RowBox[{"NumberForm", "[", 
+               RowBox[{"\[Kappa]LatCalc", ",", "4"}], "]"}]}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"StringForm", "[", 
+             RowBox[{
+             "\"\<Intrinsic mobility:                    ``      \
+\!\(\*SuperscriptBox[\(cm\), \(2\)]\)/Vs\>\"", ",", 
+              RowBox[{"NumberForm", "[", 
+               RowBox[{"\[Mu]0Calc", ",", "4"}], "]"}]}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"StringForm", "[", 
+             RowBox[{
+             "\"\<DOS effective mass:                    ``     me\>\"", ",", 
+              
+              RowBox[{"NumberForm", "[", 
+               RowBox[{"mCalc", ",", "4"}], "]"}]}], "]"}]}], 
+           "\[IndentingNewLine]", "}"}], ",", 
+          RowBox[{"Background", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"{", 
+             RowBox[{
+             "LightGray", ",", "White", ",", " ", "LightGray", ",", "White", 
+              ",", " ", "White", ",", "White"}], "}"}], "}"}]}]}], "]"}], 
+        "]"}]}], "]"}]}], "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.647107725102351*^9, 3.647108045661313*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DataPrinter", "[", "1", "]"}]], "Input",
+ CellChangeTimes->{{3.6471081299951267`*^9, 3.647108132564569*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     InterpretationBox["\<\"The chemical potential:                \\!\\(\
+\[Eta]Calc\\)\"\>",
+      StringForm["The chemical potential:                ``", 
+       NumberForm[$CellContext`\[Eta]Calc, 3]],
+      Editable->False]},
+    {
+     InterpretationBox["\<\"The Lorenz number is:                  \
+\\!\\(LCalc\\) W \[CapitalOmega] \\!\\(\\*SuperscriptBox[\\(K\\), \
+\\(-2\\)]\\)\"\>",
+      StringForm[
+      "The Lorenz number is:                  `` W \[CapitalOmega] \
+\!\(\*SuperscriptBox[\(K\), \(-2\)]\)", 
+       NumberForm[$CellContext`LCalc, 4]],
+      Editable->False]},
+    {"\<\"Thermal conductivity components:\"\>"},
+    {
+     InterpretationBox["\<\"  Total thermal conductivity:          \\!\\(\
+\[Kappa]Exp\\)    W/m K\"\>",
+      StringForm["  Total thermal conductivity:          ``    W/m K", 
+       NumberForm[$CellContext`\[Kappa]Exp, 4]],
+      Editable->False]},
+    {
+     InterpretationBox["\<\"  Electronic contribution:             \\!\\(\
+\[Kappa]EleCalc\\)    W/m K\"\>",
+      StringForm["  Electronic contribution:             ``    W/m K", 
+       NumberForm[$CellContext`\[Kappa]EleCalc, 4]],
+      Editable->False]},
+    {
+     InterpretationBox["\<\"  Lattice contribution:                \\!\\(\
+\[Kappa]LatCalc\\)     W/m K\"\>",
+      StringForm["  Lattice contribution:                ``     W/m K", 
+       NumberForm[$CellContext`\[Kappa]LatCalc, 4]],
+      Editable->False]},
+    {
+     InterpretationBox["\<\"Intrinsic mobility:                    \
+\\!\\(\[Mu]0Calc\\)      \\!\\(\\*SuperscriptBox[\\(cm\\), \\(2\\)]\\)/Vs\"\>",
+      StringForm[
+      "Intrinsic mobility:                    ``      \
+\!\(\*SuperscriptBox[\(cm\), \(2\)]\)/Vs", 
+       NumberForm[$CellContext`\[Mu]0Calc, 4]],
+      Editable->False]},
+    {
+     InterpretationBox["\<\"DOS effective mass:                    \
+\\!\\(mCalc\\)     me\"\>",
+      StringForm["DOS effective mass:                    ``     me", 
+       NumberForm[$CellContext`mCalc, 4]],
+      Editable->False]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {{Automatic}}, "Rows" -> {{
+        GrayLevel[0.85], 
+        GrayLevel[1], 
+        GrayLevel[0.85], 
+        GrayLevel[1], 
+        GrayLevel[1], 
+        GrayLevel[1]}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Print",
+ CellChangeTimes->{{3.647108132926738*^9, 3.64710814667669*^9}, 
+   3.647108197663128*^9}]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["OBJECTIVES",
+ FontSize->24]], "Section",
+ CellChangeTimes->{{3.647022233005156*^9, 3.647022236059523*^9}, {
+  3.6476053405547543`*^9, 3.647605379783566*^9}},
+ TextAlignment->Center],
+
+Cell[TextData[{
+ StyleBox["The objective is to extract fundamental semiconducting properties \
+from commonly measured experimental properties. We focus explicity on \
+properties at room temperature, facilitating comparisons between different \
+materials and methods employed by different research groups. Note that the \
+analysis can be performed at different temperatures, but we have omitted \
+contributions from the minority carriers, which may become significant at \
+high temperatures. \n\nSpecifically, from the following measured room \
+temperature properties:\n\n\t",
+  FontSize->16],
+ StyleBox["\[Alpha]",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[",  \tSeebeck Coefficient \n\t",
+  FontSize->16],
+ StyleBox["\[Mu]",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[", \tElectronic Mobility\n\t",
+  FontSize->16],
+ StyleBox["n",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[",  \tCarrier Concentration \n\t",
+  FontSize->16],
+ StyleBox["\[Rho]",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[",  \tElectrical Resistivity\n\t",
+  FontSize->16],
+ StyleBox["\[Kappa]",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[", \tTotal Thermal Conductivity\n\t\nwe can calculate the following \
+useful parameters using the routine below:\n\n\t",
+  FontSize->16],
+ StyleBox["\[Eta]",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[", \tChemical Potential\n\t",
+  FontSize->16],
+ StyleBox["L",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[", \tLorentz Number\n\t",
+  FontSize->16],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Kappa]", "e"], TraditionalForm]],
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[", \tElectronic Thermal Conductivity\n\t",
+  FontSize->16],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Kappa]", "l"], TraditionalForm]],
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[", \tElectronic Thermal Conductivity\n\t",
+  FontSize->16],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["m", "DOS"], TraditionalForm]],
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[",  Density of States Effective Mass",
+  FontSize->16]
+}], "Text",
+ CellChangeTimes->{{3.647023385230447*^9, 3.647023485959918*^9}, {
+  3.647023516263979*^9, 3.647023647962368*^9}, {3.6470920877369223`*^9, 
+  3.647092091967661*^9}, {3.647605454550722*^9, 3.647605490962888*^9}, {
+  3.6476055540811367`*^9, 3.647605554576159*^9}, {3.6476055877269297`*^9, 
+  3.647605605677497*^9}, {3.6476056917073917`*^9, 3.6476056953369513`*^9}, {
+  3.6476057794530573`*^9, 3.647605829410265*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["MODELS/ASSUMPTIONS",
+ FontSize->24]], "Section",
+ CellChangeTimes->{{3.6470236578262377`*^9, 3.6470236625207167`*^9}, 
+   3.647091275302116*^9, {3.647605866272275*^9, 3.6476059002625847`*^9}},
+ TextAlignment->Center],
+
+Cell[TextData[{
+ StyleBox["To simplify the analysis, it is necessary to apply two key \
+models/assumptions: (1) ",
+  FontSize->16],
+ StyleBox["Relaxation Time Approximation (RTA) ",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox["and (2) ",
+  FontSize->16],
+ StyleBox["Single Parabolic Band Model (SPB)",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[". Within the ",
+  FontSize->16],
+ StyleBox["RTA",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[", we assume that the relaxation time \[Tau](\[CapitalEpsilon]) is \
+expected to follow a power law where:\n\n\t\[Tau] (\[CapitalEpsilon]) = ",
+  FontSize->16],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Tau]", "0"], 
+    SuperscriptBox["\[CapitalEpsilon]", 
+     RowBox[{" ", "\[Lambda]"}]]}], TraditionalForm]],
+  FontSize->16,
+  FontWeight->"Plain"],
+ StyleBox["\n\t\nIt is now necessary to assume a dominant charge carrier \
+scattering mechanism. For virtually all common thermoelectric materials, the \
+charge carrier mobility is limited by acoustic phonon scattering. Within the ",
+  FontSize->16],
+ StyleBox["RTA",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[", this implies that \[Lambda] = -0.5. For a detailed discussion of \
+the various scattering phenomenon, please refer to the Boltzmann Transport \
+notebook on the TEDesignLab website (coming soon).\n\nExperimentally, one can \
+examine the temperature dependence of the electronic mobility to access the \
+dominant scattering mechanism. With increasing temperature, the increased \
+phonon population should lead to a reduction in the electronic mobility. As \
+expected, the Hall mobility should decay with increasing temperature \
+according to ",
+  FontSize->16],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Mu]", "H"], " ", "\[Proportional]", " ", 
+    SuperscriptBox["T", 
+     RowBox[{" ", 
+      RowBox[{"-", "1.0"}]}]]}], TraditionalForm]],
+  FontSize->16],
+ StyleBox[" to ",
+  FontSize->16],
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["T", 
+    RowBox[{" ", 
+     RowBox[{"-", "1.5"}]}]], TraditionalForm]],
+  FontSize->16],
+ StyleBox[" for acoustic phonon scattering. In the absence of Hall \
+measurements, temperature dependent electrical resistivity on heavily doped \
+samples can also be examined. For acoustic phonon scattering of charge \
+carriers, one can expect a roughly linear (",
+  FontSize->16],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Rho]", "e"], "\[Proportional]", " ", "T"}], 
+   TraditionalForm]],
+  FontSize->16],
+ StyleBox[") increase in the resistivity.\t",
+  FontSize->16]
+}], "Text",
+ CellChangeTimes->{{3.64702367274577*^9, 3.647023727030388*^9}, {
+  3.647023762504777*^9, 3.647023774040357*^9}, {3.64702381329769*^9, 
+  3.647023886032172*^9}, {3.6470239431179943`*^9, 3.647024221796191*^9}, {
+  3.647024256454115*^9, 3.6470246165138197`*^9}, {3.647024649776729*^9, 
+  3.647024668439831*^9}, {3.647093441485005*^9, 3.647093449800037*^9}, {
+  3.6476059094153013`*^9, 3.64760592339854*^9}, {3.647605956380947*^9, 
+  3.647605999570722*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["USEFUL CONSTANTS",
+ FontSize->24]], "Section",
+ CellChangeTimes->{{3.647005848754434*^9, 3.6470058494099407`*^9}, {
+   3.647005923271597*^9, 3.647005975572015*^9}, 3.647006089872466*^9, {
+   3.647606034464162*^9, 3.647606036920025*^9}},
+ TextAlignment->Center],
+
+Cell[TextData[StyleBox["Here we define some fundamental constants. The units \
+are self consistent within the MKGS system of SI units.",
+ FontSize->16]], "Text",
+ CellChangeTimes->{{3.647006103743877*^9, 3.647006109510536*^9}, {
+  3.6470065005816393`*^9, 3.647006508619935*^9}, {3.647006570729368*^9, 
+  3.647006572153329*^9}, {3.647090986485467*^9, 3.647091008372508*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Planck", "'"}], "s", " ", "Constant", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      SuperscriptBox["m", "2"], 
+      RowBox[{"kg", "/", "s"}]}], ")"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"h", "=", 
+     RowBox[{"6.6260755", "*", 
+      SuperscriptBox["10", 
+       RowBox[{"-", "34"}]]}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Reduced", " ", 
+     RowBox[{"Planck", "'"}], "s", " ", "Constant", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       SuperscriptBox["m", "2"], 
+       RowBox[{"kg", "/", "s"}]}], ")"}]}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[HBar]", "=", 
+     RowBox[{
+      RowBox[{"h", "/", "2"}], "\[Pi]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Electron", " ", "Rest", " ", "Mass", " ", 
+     RowBox[{"(", "kg", ")"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"m", "=", 
+     RowBox[{"9.1093897", " ", 
+      SuperscriptBox["10", 
+       RowBox[{"-", "31"}]]}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Boltzmann", " ", "Constant", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       SuperscriptBox["m", "2"], 
+       RowBox[{"kg", "/", 
+        SuperscriptBox["s", "2"]}], "K"}], ")"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"k", "=", 
+     RowBox[{"1.3806505", " ", 
+      SuperscriptBox["10", 
+       RowBox[{"-", "23"}]]}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Fundamental", " ", "Charge", " ", 
+     RowBox[{"(", "C", ")"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"q", "=", 
+     RowBox[{"1.60217653", " ", 
+      SuperscriptBox["10", 
+       RowBox[{"-", "19"}]]}]}], ";"}], "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.6293149268173723`*^9, 3.629314929659721*^9}, {
+   3.629383314072918*^9, 3.629383314436288*^9}, 3.629383350018115*^9, {
+   3.6300253807990913`*^9, 3.630025437232342*^9}, {3.630028267945932*^9, 
+   3.630028273181127*^9}, {3.647090785324494*^9, 3.647091014279524*^9}, {
+   3.647091669385748*^9, 3.647091678310128*^9}},
+ FontSize->14],
+
+Cell[TextData[{
+ StyleBox["In the ",
+  FontSize->16],
+ StyleBox["Models/Assumptions",
+  FontSize->16,
+  FontSlant->"Italic"],
+ StyleBox[" section, we defined both the desired temperature (300K) and the \
+assumed scattering factor within the",
+  FontSize->16],
+ StyleBox[" RTA",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[". Here we input these key parameters.",
+  FontSize->16]
+}], "Text",
+ CellChangeTimes->{{3.64709102106175*^9, 3.647091021948144*^9}, {
+  3.647091080693645*^9, 3.64709118404953*^9}, {3.647606067315909*^9, 
+  3.647606091429254*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Temperature", " ", 
+    RowBox[{"(", "K", ")"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"T", "=", "300"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    StyleBox[" ",
+     FontWeight->"Plain"], 
+    RowBox[{"RTA", " ", "Scattering", " ", "Factor", " ", 
+     RowBox[{"(", "Unitless", ")"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Lambda]", "=", 
+     RowBox[{"-", "0.5"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.6470911857733593`*^9, 3.647091245007875*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["DATA ENTRY",
+ FontSize->24]], "Section",
+ CellChangeTimes->{{3.647091264871393*^9, 3.64709127136644*^9}, {
+  3.647606100364883*^9, 3.647606101716815*^9}},
+ TextAlignment->Center],
+
+Cell[TextData[StyleBox["Here we input the room temperature measured \
+properties. Please ensure that your units match those listed for each \
+parameter. ",
+ FontSize->16]], "Text",
+ CellChangeTimes->{{3.64709102106175*^9, 3.647091021948144*^9}, {
+  3.647091080693645*^9, 3.64709118404953*^9}, {3.6470913136062*^9, 
+  3.647091408305705*^9}, {3.647092261924807*^9, 3.647092274555162*^9}, {
+  3.6476061318938627`*^9, 3.647606154618339*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Seebeck", " ", 
+    RowBox[{"Coefficient", " ", "@", "300"}], "K", " ", 
+    RowBox[{"(", 
+     RowBox[{"\[Mu]V", "/", "K"}], ")"}]}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[Alpha]User", "=", "120"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Electronic", " ", 
+     RowBox[{"Mobility", " ", "@", "300"}], "K", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       SuperscriptBox["cm", "2"], "/", "Vs"}], ")"}]}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Mu]User", "=", "120"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Carrier", " ", "Concentration", " ", 
+     RowBox[{"(", 
+      SuperscriptBox["cm", 
+       RowBox[{"-", "3"}]], ")"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"nUser", "=", 
+     RowBox[{"1", "*", 
+      SuperscriptBox["10", "19"]}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Electrical", " ", "Resistivity", " ", 
+     RowBox[{"(", 
+      RowBox[{"m\[CapitalOmega]", " ", "cm"}], ")"}]}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Rho]User", "=", "5.2"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Total", " ", "Thermal", " ", "Conductivity", " ", 
+     RowBox[{"(", 
+      RowBox[{"W", "/", "mK"}], ")"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Kappa]User", "=", "1.001"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.647091432882513*^9, 3.647091602360745*^9}, {
+  3.647092251502594*^9, 3.6470922599642076`*^9}, {3.6471015331876097`*^9, 
+  3.6471015738957653`*^9}, {3.647108141252684*^9, 3.647108141523067*^9}},
+ Background->RGBColor[0.9, 1, 1]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["PRE-PROCESSING",
+ FontSize->24]], "Section",
+ CellChangeTimes->{{3.647091610360183*^9, 3.647091612607387*^9}, {
+  3.647092925939867*^9, 3.647092927035713*^9}, {3.6476061758743353`*^9, 
+  3.647606178537146*^9}},
+ TextAlignment->Center],
+
+Cell[TextData[{
+ StyleBox["First we convert all the parameters into SI units. Additionally, \
+we use the absolute value for all parameters, to eliminate different methods \
+of reporting (e.g. ",
+  FontSize->16],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"-", "5"}], 
+    SuperscriptBox["x10", "19"]}], TraditionalForm]],
+  FontSize->16],
+ StyleBox[" for n-type carrier concentration).",
+  FontSize->16]
+}], "Text",
+ CellChangeTimes->{{3.64709102106175*^9, 3.647091021948144*^9}, {
+  3.647091080693645*^9, 3.64709118404953*^9}, {3.6470916414237413`*^9, 
+  3.647091642142277*^9}, {3.6470916847250557`*^9, 3.647091798177189*^9}, {
+  3.647091851256315*^9, 3.647091893846077*^9}, {3.6476062048239*^9, 
+  3.6476062298946447`*^9}, {3.647606261750987*^9, 3.6476062809722548`*^9}, {
+  3.647606318250758*^9, 3.6476063202822742`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Absolute", " ", "Seebeck", " ", 
+    RowBox[{"Coefficient", " ", "@", "300"}], "K", " ", 
+    RowBox[{"(", 
+     RowBox[{"V", "/", "k"}], ")"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[Alpha]Exp", "=", " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{"\[Alpha]User", "*", 
+       SuperscriptBox["10", 
+        RowBox[{"-", "6"}]]}], 
+      RowBox[{"(*", 
+       RowBox[{"\[Mu]V", "/", "V"}], "*)"}], "]"}]}], ";"}], "  ", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Absolute", " ", "Electronic", " ", 
+     RowBox[{"Mobility", " ", "@", "300"}], "K", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       SuperscriptBox["m", "2"], "/", "Vs"}], ")"}]}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Mu]Exp", " ", "=", " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{"\[Mu]User", "*", 
+       SuperscriptBox["10", 
+        RowBox[{"-", "4"}]]}], 
+      RowBox[{"(*", 
+       RowBox[{
+        SuperscriptBox["m", "2"], "/", 
+        SuperscriptBox["cm", "2"]}], "*)"}], "]"}]}], ";"}], " ", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Absolute", " ", "Carrier", " ", 
+     RowBox[{"Concentration", " ", "@", "300"}], "K", " ", 
+     RowBox[{"(", 
+      SuperscriptBox["m", 
+       RowBox[{"-", "3"}]], ")"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"nExp", "=", 
+     RowBox[{"Abs", "[", 
+      RowBox[{"nUser", "*", 
+       SuperscriptBox["10", "6"]}], 
+      RowBox[{"(*", 
+       RowBox[{
+        SuperscriptBox["m", 
+         RowBox[{"-", "3"}]], "/", 
+        SuperscriptBox["cm", 
+         RowBox[{"-", "3"}]]}], "*)"}], "]"}]}], ";"}], " ", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Absolute", " ", "Electrical", " ", 
+     RowBox[{"Resistivity", " ", "@", "300"}], "K", " ", 
+     RowBox[{"(", 
+      RowBox[{"\[CapitalOmega]", " ", "m"}], ")"}]}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Rho]Exp", "=", " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{"\[Rho]User", "*", 
+       SuperscriptBox["10", 
+        RowBox[{"-", "5"}]]}], 
+      RowBox[{"(*", 
+       RowBox[{"\[CapitalOmega]", "/", "m\[CapitalOmega]"}], "*)"}], 
+      RowBox[{"(*", 
+       RowBox[{"m", "/", "cm"}], "*)"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Absolute", " ", "Electrical", " ", 
+     RowBox[{"Conductivity", " ", "@", "300"}], "K", " ", 
+     RowBox[{"(", 
+      RowBox[{"S", "/", "m"}], ")"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Sigma]Exp", "=", " ", 
+     SuperscriptBox["\[Rho]Exp", 
+      RowBox[{"-", "1"}]]}], ";"}], " ", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Absolute", " ", "Thermal", " ", 
+     RowBox[{"Conductivity", " ", "@", "300"}], "K", " ", 
+     RowBox[{"(", 
+      RowBox[{"W", "/", "mK"}], ")"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Kappa]Exp", "=", " ", "\[Kappa]User"}], ";"}], 
+   " "}]}]], "Input",
+ CellChangeTimes->{{3.5569227250886636`*^9, 3.556922880955579*^9}, {
+   3.556922915483554*^9, 3.556922946865349*^9}, {3.556923009013903*^9, 
+   3.5569230274509583`*^9}, {3.5569260101265574`*^9, 
+   3.5569260254454336`*^9}, {3.5569283568057795`*^9, 3.556928372044651*^9}, {
+   3.557422748556734*^9, 3.557422755787621*^9}, {3.5574229105571623`*^9, 
+   3.557422913746228*^9}, {3.6076311836068296`*^9, 3.607631183768998*^9}, {
+   3.607631837929269*^9, 3.607631865316139*^9}, {3.607631928068575*^9, 
+   3.607632143500065*^9}, {3.607632180817542*^9, 3.6076322324510508`*^9}, 
+   3.607632304347131*^9, {3.607632483635936*^9, 3.607632602721686*^9}, {
+   3.607632639365601*^9, 3.607632660098477*^9}, {3.607632705607276*^9, 
+   3.607632795556682*^9}, {3.607632875556345*^9, 3.607632977092738*^9}, {
+   3.607633981912177*^9, 3.6076340191655188`*^9}, {3.607634106588696*^9, 
+   3.6076341413889236`*^9}, {3.607636688440201*^9, 3.607636726983675*^9}, {
+   3.607637431817115*^9, 3.607637432172886*^9}, {3.607637468932456*^9, 
+   3.6076375931289797`*^9}, {3.607641387474345*^9, 3.607641388578429*^9}, {
+   3.610975639077198*^9, 3.610975640448427*^9}, {3.629315671314633*^9, 
+   3.629315816324893*^9}, {3.629316012758821*^9, 3.629316048149138*^9}, {
+   3.629316097041288*^9, 3.629316119708808*^9}, {3.630027952389387*^9, 
+   3.630027953482522*^9}, {3.6300280206307573`*^9, 3.630028025678203*^9}, {
+   3.63022384348289*^9, 3.6302238764476833`*^9}, {3.6470918008748503`*^9, 
+   3.647091828657817*^9}, {3.647091907949973*^9, 3.6470920739132223`*^9}, {
+   3.647092104687437*^9, 3.6470922266236973`*^9}, {3.6470922797917633`*^9, 
+   3.647092290595731*^9}, 3.6470925586360073`*^9, {3.6470926070379047`*^9, 
+   3.647092610234693*^9}, {3.647101469953746*^9, 3.6471014787520533`*^9}, {
+   3.647101546793195*^9, 3.647101587175376*^9}, {3.647106363770834*^9, 
+   3.647106388184506*^9}, {3.6476063467122*^9, 3.647606347826586*^9}},
+ FontSize->14],
+
+Cell[TextData[StyleBox["Self-consistency check using the standard equation \
+\[Sigma] = n e \[Mu].",
+ FontSize->16]], "Text",
+ CellChangeTimes->{{3.64709102106175*^9, 3.647091021948144*^9}, {
+  3.647091080693645*^9, 3.64709118404953*^9}, {3.6470916414237413`*^9, 
+  3.647091642142277*^9}, {3.6470916847250557`*^9, 3.647091798177189*^9}, {
+  3.647091851256315*^9, 3.647091893846077*^9}, {3.647092626794209*^9, 
+  3.647092628544942*^9}, {3.6470926788721733`*^9, 3.647092724801298*^9}, {
+  3.647092786923595*^9, 3.647092874885536*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Print", "[", 
+  RowBox[{
+  "\"\<This should approximately equal 1 if \[Sigma], \[Mu]H, and nH are \
+entered correctly: \>\"", ",", 
+   FractionBox["\[Sigma]Exp", 
+    RowBox[{"nExp", " ", "q", " ", "\[Mu]Exp"}]]}], "   ", "]"}]], "Input",
+ CellChangeTimes->{
+  3.647092618580018*^9, {3.647092883150869*^9, 3.647092906775984*^9}, {
+   3.64710149825667*^9, 3.647101500959426*^9}, {3.647101594264763*^9, 
+   3.6471015979682903`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"This should approximately equal 1 if \[Sigma], \[Mu]H, and nH \
+are entered correctly: \"\>", "\[InvisibleSpace]", "1.0002419037832881`"}],
+  SequenceForm[
+  "This should approximately equal 1 if \[Sigma], \[Mu]H, and nH are entered \
+correctly: ", 1.0002419037832881`],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.6470925695131483`*^9, 3.6470926126454153`*^9, 3.647092907606864*^9, 
+   3.647101420633885*^9, 3.647101501893396*^9, {3.647101598324128*^9, 
+   3.647101603120068*^9}, 3.6471058577775908`*^9, 3.647108058790742*^9, 
+   3.647108147003886*^9, 3.647108197794037*^9},
+ Background->GrayLevel[0.85]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["DATA PROCESSING",
+ FontSize->24]], "Section",
+ CellChangeTimes->{{3.6470249155325623`*^9, 3.647024921915041*^9}, {
+  3.647092933196022*^9, 3.647092934811693*^9}, {3.6476063791529093`*^9, 
+  3.647606383127391*^9}},
+ TextAlignment->Center],
+
+Cell[TextData[StyleBox["We will only briefly describe the underlying physics \
+here. For more details, refer to the Boltzmann Transport notebook on the \
+TEDesignLab website (coming soon).",
+ FontSize->16]], "Text",
+ CellChangeTimes->{{3.64709102106175*^9, 3.647091021948144*^9}, {
+  3.647091080693645*^9, 3.64709118404953*^9}, {3.647093255238982*^9, 
+  3.647093288901333*^9}, {3.6470933278543787`*^9, 3.647093394900157*^9}, {
+  3.647093471619975*^9, 3.647093504946855*^9}, {3.6471003060801983`*^9, 
+  3.647100329853668*^9}, {3.647100367916483*^9, 3.647100480855365*^9}, {
+  3.6471011538730164`*^9, 3.647101164511643*^9}, {3.647105618137521*^9, 
+  3.647105640563236*^9}, {3.6476063935380898`*^9, 3.64760640341464*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Chemical Potential from Seebeck Coefficient", "Subsection",
+ CellChangeTimes->{{3.647105652771858*^9, 3.6471056616344013`*^9}}],
+
+Cell[TextData[{
+ StyleBox["First, we define the ",
+  FontSize->16],
+ StyleBox["Fermi-Dirac Distribution (P)",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" and the associated ",
+  FontSize->16],
+ StyleBox["Fermi integral (F)",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" in terms of the ",
+  FontSize->16],
+ StyleBox["energy (\[CapitalEpsilon])",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" and the ",
+  FontSize->16],
+ StyleBox["chemical potential (\[Eta])",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[". In this context, the ",
+  FontSize->16],
+ StyleBox["scattering factor (r)",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" is related to \[Lambda] (from RTA) through the Fermi function. ",
+  FontSize->16]
+}], "Text",
+ CellChangeTimes->{{3.64709102106175*^9, 3.647091021948144*^9}, {
+  3.647091080693645*^9, 3.64709118404953*^9}, {3.647093255238982*^9, 
+  3.647093288901333*^9}, {3.6470933278543787`*^9, 3.647093394900157*^9}, {
+  3.647093471619975*^9, 3.647093504946855*^9}, {3.6471003060801983`*^9, 
+  3.647100329853668*^9}, {3.647100367916483*^9, 3.647100480855365*^9}, {
+  3.6471011538730164`*^9, 3.647101164511643*^9}, {3.647105618137521*^9, 
+  3.647105643939826*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"P", "[", 
+    RowBox[{"\[Epsilon]_", ",", "r_", ",", "\[Eta]_"}], "]"}], ":=", 
+   FractionBox[
+    SuperscriptBox["\[Epsilon]", "r"], 
+    RowBox[{"1", "+", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{"\[Epsilon]", "-", "\[Eta]"}]]}]]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"F", "[", 
+    RowBox[{"r_", ",", "\[Eta]_"}], "]"}], ":=", 
+   RowBox[{
+    SubsuperscriptBox["\[Integral]", "0", "\[Infinity]"], 
+    RowBox[{
+     FractionBox[
+      SuperscriptBox["\[Epsilon]", "r"], 
+      RowBox[{"1", "+", 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"\[Epsilon]", "-", "\[Eta]"}]]}]], 
+     RowBox[{"\[DifferentialD]", "\[Epsilon]"}]}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.647093396548781*^9, 3.647093468772438*^9}, {
+  3.647100177293262*^9, 3.647100204696081*^9}, {3.647100356979928*^9, 
+  3.647100357612823*^9}, {3.647100496635044*^9, 3.647100512449856*^9}, {
+  3.64710056961693*^9, 3.647100613960528*^9}, {3.647101168368829*^9, 
+  3.6471011721788187`*^9}, {3.6471070555958977`*^9, 3.647107087726245*^9}}],
+
+Cell[TextData[{
+ StyleBox["Recall that the ",
+  FontSize->16],
+ StyleBox["Seebeck Coefficient (\[Alpha]) ",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox["can be defined in terms of the chemical potential (\[Eta]), the \
+Fermi integral (F), and the ",
+  FontSize->16],
+ StyleBox["RTA scattering factor (\[Lambda])",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[":",
+  FontSize->16]
+}], "Text",
+ CellChangeTimes->{{3.64709102106175*^9, 3.647091021948144*^9}, {
+  3.647091080693645*^9, 3.64709118404953*^9}, {3.647093255238982*^9, 
+  3.647093288901333*^9}, {3.6470933278543787`*^9, 3.647093394900157*^9}, {
+  3.647093471619975*^9, 3.647093504946855*^9}, {3.6471003060801983`*^9, 
+  3.647100329853668*^9}, {3.647100367916483*^9, 3.647100480855365*^9}, {
+  3.647100639826672*^9, 3.647100664138228*^9}, {3.647100873681419*^9, 
+  3.6471010368269444`*^9}, {3.647102281683497*^9, 3.64710228216367*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[Alpha]", "[", 
+     RowBox[{"\[Lambda]_", ",", " ", "\[Eta]_"}], "]"}], ":=", 
+    RowBox[{
+     FractionBox["k", "q"], 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         FractionBox[
+          RowBox[{"2.5", "+", "\[Lambda]"}], 
+          RowBox[{"1.5", "+", "\[Lambda]"}]], ")"}], 
+        RowBox[{"(", 
+         FractionBox[
+          RowBox[{"F", "[", 
+           RowBox[{
+            RowBox[{"1.5", "+", "\[Lambda]"}], ",", "\[Eta]"}], "]"}], 
+          RowBox[{"F", "[", 
+           RowBox[{
+            RowBox[{"0.5", "+", "\[Lambda]"}], ",", "\[Eta]"}], "]"}]], 
+         ")"}]}], "-", "\[Eta]"}], ")"}]}]}], ";"}], "  "}]], "Input",
+ CellChangeTimes->{{3.647100971117194*^9, 3.647100971899534*^9}, {
+  3.6471010505503902`*^9, 3.647101134574852*^9}, {3.6471012033623133`*^9, 
+  3.647101205753058*^9}}],
+
+Cell[TextData[StyleBox["Given an experimental value for Seebeck coefficient (\
+\[Alpha]), we can solve backwards to find the chemical potential (\[Eta]).",
+ FontSize->16]], "Text",
+ CellChangeTimes->{{3.64709102106175*^9, 3.647091021948144*^9}, {
+  3.647091080693645*^9, 3.64709118404953*^9}, {3.647093255238982*^9, 
+  3.647093288901333*^9}, {3.6470933278543787`*^9, 3.647093394900157*^9}, {
+  3.647093471619975*^9, 3.647093504946855*^9}, {3.6471003060801983`*^9, 
+  3.647100329853668*^9}, {3.647100367916483*^9, 3.647100480855365*^9}, {
+  3.647100639826672*^9, 3.647100664138228*^9}, {3.647100873681419*^9, 
+  3.6471010368269444`*^9}, {3.647101216374881*^9, 3.6471012399809437`*^9}, {
+  3.647101274348948*^9, 3.647101301778636*^9}, {3.647101687021575*^9, 
+  3.647101700396119*^9}, {3.6471059580723743`*^9, 3.647105963152321*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[Eta]Calc", "=", 
+   RowBox[{"\[Eta]", "/.", 
+    RowBox[{"FindRoot", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"\[Alpha]", "[", 
+        RowBox[{"\[Lambda]", ",", "\[Eta]"}], "]"}], "\[Equal]", 
+       "\[Alpha]Exp"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\[Eta]", ",", "1"}], "}"}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{
+  "\"\<The chemical potential is \>\"", ",", "\[Eta]Calc", ",", " ", 
+   "\"\< J/mol\>\""}], "]"}]}], "Input",
+ CellChangeTimes->{{3.647101315343341*^9, 3.647101337009612*^9}, {
+  3.647101522749715*^9, 3.647101522916885*^9}, {3.6471016081277637`*^9, 
+  3.6471016599817038`*^9}, {3.647102396853414*^9, 3.647102446951573*^9}, {
+  3.6471024973950253`*^9, 3.6471025053600607`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The chemical potential is \"\>", "\[InvisibleSpace]", 
+   "1.7706168125485846`", "\[InvisibleSpace]", "\<\" J/mol\"\>"}],
+  SequenceForm["The chemical potential is ", 1.7706168125485846`, " J/mol"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6471024403317003`*^9, 3.647102447787108*^9}, {
+   3.64710250645264*^9, 3.647102521429611*^9}, 3.647105858488036*^9, 
+   3.6471080650865498`*^9, 3.647108147698688*^9, 3.647108198259685*^9},
+ Background->GrayLevel[0.85]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Density of States Effective Mass from Chemical Potential", "Subsection",
+ CellChangeTimes->{{3.647105669251309*^9, 3.647105678217539*^9}}],
+
+Cell[TextData[{
+ StyleBox["Given the chemical potential (\[Eta]), we can determine the ",
+  FontSize->16],
+ StyleBox["density of states effective mass ",
+  FontSize->16,
+  FontWeight->"Bold"],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    SubscriptBox["m", "DOS"]}], TraditionalForm]],
+  FontWeight->"Bold"],
+ StyleBox[")",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[". Recall that the ",
+  FontSize->16],
+ StyleBox["carrier",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" ",
+  FontSize->16],
+ StyleBox["concentration (n)",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" is a function of the ",
+  FontSize->16],
+ StyleBox["temperature (T)",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[", the ",
+  FontSize->16],
+ StyleBox["density of states effective mass ",
+  FontSize->16,
+  FontWeight->"Bold"],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    SubscriptBox["m", "DOS"]}], TraditionalForm]],
+  FontWeight->"Bold"],
+ StyleBox[")",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" and the ",
+  FontSize->16],
+ StyleBox["chemical potential (\[Eta])",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[".",
+  FontSize->16]
+}], "Text",
+ CellChangeTimes->{{3.64709102106175*^9, 3.647091021948144*^9}, {
+  3.647091080693645*^9, 3.64709118404953*^9}, {3.647093255238982*^9, 
+  3.647093288901333*^9}, {3.6470933278543787`*^9, 3.647093394900157*^9}, {
+  3.647093471619975*^9, 3.647093504946855*^9}, {3.6471003060801983`*^9, 
+  3.647100329853668*^9}, {3.647100367916483*^9, 3.647100480855365*^9}, {
+  3.647100639826672*^9, 3.647100664138228*^9}, {3.647100873681419*^9, 
+  3.6471010368269444`*^9}, {3.647101216374881*^9, 3.6471012399809437`*^9}, {
+  3.647101274348948*^9, 3.647101301778636*^9}, {3.647101687021575*^9, 
+  3.647101790453725*^9}, {3.647102160317034*^9, 3.647102236484639*^9}, {
+  3.647102560282621*^9, 3.647102568826539*^9}, {3.6476064487759037`*^9, 
+  3.647606489093585*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"n", "[", 
+    RowBox[{"mDOS_", ",", "r_", ",", "\[Eta]_"}], "]"}], ":=", 
+   RowBox[{"4", "\[Pi]", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      FractionBox[
+       RowBox[{"2", " ", "mDOS", " ", "m", " ", "k", " ", "T"}], 
+       RowBox[{
+        SuperscriptBox["h", "2"], " "}]], ")"}], 
+     RowBox[{"3", "/", "2"}]], " ", 
+    RowBox[{"F", "[", 
+     RowBox[{"r", ",", "\[Eta]"}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.647102317864896*^9, 3.647102382167877*^9}}],
+
+Cell[TextData[{
+ StyleBox["Given the carrier concentration (n), we can solve for the ",
+  FontSize->16],
+ StyleBox["density of states effective mass ",
+  FontSize->16,
+  FontWeight->"Bold"],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    SubscriptBox["m", "DOS"]}], TraditionalForm]],
+  FontWeight->"Bold"],
+ StyleBox[")",
+  FontSize->16,
+  FontWeight->"Bold"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.64709102106175*^9, 3.647091021948144*^9}, {
+  3.647091080693645*^9, 3.64709118404953*^9}, {3.647093255238982*^9, 
+  3.647093288901333*^9}, {3.6470933278543787`*^9, 3.647093394900157*^9}, {
+  3.647093471619975*^9, 3.647093504946855*^9}, {3.6471003060801983`*^9, 
+  3.647100329853668*^9}, {3.647100367916483*^9, 3.647100480855365*^9}, {
+  3.647100639826672*^9, 3.647100664138228*^9}, {3.647100873681419*^9, 
+  3.6471010368269444`*^9}, {3.647101216374881*^9, 3.6471012399809437`*^9}, {
+  3.647101274348948*^9, 3.647101301778636*^9}, {3.647101687021575*^9, 
+  3.647101700396119*^9}, {3.647102538380013*^9, 3.647102588417457*^9}, {
+  3.647606516308517*^9, 3.647606569120144*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"mCalc", "=", 
+   RowBox[{"mDOS", "/.", 
+    RowBox[{"Flatten", "[", 
+     RowBox[{"Chop", "[", 
+      RowBox[{"Solve", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"n", "[", 
+          RowBox[{"mDOS", ",", "0.5", ",", "\[Eta]Calc"}], "]"}], "==", 
+         "nExp"}], ",", "mDOS"}], "]"}], "]"}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{
+  "\"\<The density of states effective mass is \>\"", ",", "mCalc", ",", " ", 
+   "\"\< \!\(\*SubscriptBox[\(m\), \(e\)]\)\>\""}], "]"}]}], "Input",
+ CellChangeTimes->{{3.647102596126882*^9, 3.647102613130746*^9}, {
+  3.647102658986228*^9, 3.6471026665064993`*^9}, {3.647102708208832*^9, 
+  3.647102716055182*^9}, {3.647102766650612*^9, 3.647102772130824*^9}, {
+  3.647102812609202*^9, 3.647102898678319*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The density of states effective mass is \"\>", 
+   "\[InvisibleSpace]", "0.294068121971246`", 
+   "\[InvisibleSpace]", "\<\" \\!\\(\\*SubscriptBox[\\(m\\), \
+\\(e\\)]\\)\"\>"}],
+  SequenceForm[
+  "The density of states effective mass is ", 0.294068121971246, 
+   " \!\(\*SubscriptBox[\(m\), \(e\)]\)"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.647102887191113*^9, 3.6471028993113737`*^9}, 
+   3.647105860601284*^9, 3.647108068844018*^9, 3.64710814819088*^9, 
+   3.647108198573545*^9},
+ Background->GrayLevel[0.85]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Intrinsic Mobility from Chemical Potential and Mobility", "Subsection",
+ CellChangeTimes->{{3.6471065822500687`*^9, 3.647106587408407*^9}, {
+   3.647106740933791*^9, 3.647106744469071*^9}, {3.647107119399802*^9, 
+   3.647107123765979*^9}, 3.647606584401248*^9}],
+
+Cell[TextData[{
+ StyleBox["In general, thermoelectrics are almost degenerately doped, which \
+often has a detrimental effect on the mobility. It is useful to know the \
+intrinsic mobility of charge carriers, even if the thermoelectric material is \
+engineered to operate at much higher carrier concentrations with lower \
+mobility compared to the intrinsic value. \n\nWe can describe the ",
+  FontSize->16],
+ StyleBox["electronic (Hall) mobility (\[Mu]) ",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox["in terms of a ",
+  FontSize->16],
+ StyleBox["non-degenerate (intrinsic) mobility (",
+  FontSize->16,
+  FontWeight->"Bold"],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Mu]", "o"], ")"}], TraditionalForm]],
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[", ",
+  FontSize->16],
+ StyleBox["chemical potential (\[Eta])",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[", and ",
+  FontSize->16],
+ StyleBox["Fermi Integral (F)",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[". The equation also makes use of the",
+  FontSize->16],
+ StyleBox[" Gamma function (\[CapitalGamma])",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[", which is also defined below for convenience.",
+  FontSize->16]
+}], "Text",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQA2IQffvnQk03ndeORuH7wHS4kZghiD4wldEORO9b+tzB
+HUjvuC7jCqKFwn97gmixczFBIPratc/RIHqxj1wCiP4zwWmTF5B2CLTeCqKv
+BP/dCaLV4qVPgGjJkl+3QXRsDst9EK1/zvQniA4pm8XrDaTZ/nOrgOgnyf/V
+QPRULW9tED3t1Q49EL1vw4M4EM20ticBRAtq+pwE0eeje8+D6KAjEh6+QHpz
+zkIw3VL+OBREr/ZhDwfRzFWdWSB616LneSCaS/l1G4jumqY+A0Qvs1a9CaJ5
+Ct/fB9HS6RZPQLRcoM9TEN1wY9drEP1C4vR3EC2Rt5vZD0hzKLXzg+hJWaov
+HHWB/q0z/Q6iAbzunSY=
+  "]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[CapitalGamma]", "[", "Z_", "]"}], ":=", 
+   RowBox[{
+    SubsuperscriptBox["\[Integral]", "0", "\[Infinity]"], 
+    RowBox[{
+     SuperscriptBox["x", 
+      RowBox[{"Z", "-", "1"}]], 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{"-", "x"}]], 
+     RowBox[{"\[DifferentialD]", "x"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Mu]", "[", 
+   RowBox[{"\[Mu]0_", ",", "\[Eta]_"}], "]"}], ":=", 
+  RowBox[{"\[Mu]0", 
+   FractionBox[
+    RowBox[{" ", 
+     RowBox[{
+      SuperscriptBox["\[Pi]", "0.5"], 
+      RowBox[{"F", "[", 
+       RowBox[{
+        RowBox[{"0.5", "+", "\[Lambda]"}], ",", "\[Eta]"}], "]"}]}]}], 
+    RowBox[{"2", " ", 
+     RowBox[{"\[CapitalGamma]", "[", 
+      RowBox[{"1.5", "+", "\[Lambda]"}], "]"}], 
+     RowBox[{"F", "[", 
+      RowBox[{"0.5", ",", "\[Eta]"}], "]"}]}]]}]}]}], "Input",
+ CellChangeTimes->{{3.6471068214508553`*^9, 3.6471069029497223`*^9}, {
+   3.647107015651664*^9, 3.647107050858122*^9}, 3.647107367348569*^9, {
+   3.647107404392112*^9, 3.647107408119219*^9}}],
+
+Cell[TextData[{
+ StyleBox["Given the electronic (Hall) mobility (\[Mu]), we can solve for the \
+",
+  FontSize->16],
+ StyleBox["intrinsic mobility (",
+  FontSize->16,
+  FontWeight->"Bold"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Mu]", "0"], TraditionalForm]],
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[")",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[".",
+  FontSize->16]
+}], "Text",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQA2IQffvnQk03ndeORuH7wHS4kZghiD4wldEORO9b+tzB
+HUjvuC7jCqKFwn97gmixczFBIPratc/RIHqxj1wCiP4zwWmTF5B2CLTeCqKv
+BP/dCaLV4qVPgGjJkl+3QXRsDst9EK1/zvQniA4pm8XrDaTZ/nOrgOgnyf/V
+QPRULW9tED3t1Q49EL1vw4M4EM20ticBRAtq+pwE0eeje8+D6KAjEh6+QHpz
+zkIw3VL+OBREr/ZhDwfRzFWdWSB616LneSCaS/l1G4jumqY+A0Qvs1a9CaJ5
+Ct/fB9HS6RZPQLRcoM9TEN1wY9drEP1C4vR3EC2Rt5vZD0iv+ssnAaL51Xf/
+cNR97fhOwfg3iAYA1r+efw==
+  "]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[Mu]0Calc", "=", 
+   RowBox[{"\[Mu]0", "/.", 
+    RowBox[{"Flatten", "[", 
+     RowBox[{"Chop", "[", 
+      RowBox[{"Solve", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"\[Mu]", "[", 
+          RowBox[{"\[Mu]0", ",", "\[Eta]Calc"}], "]"}], "\[Equal]", 
+         "\[Mu]Exp"}], ",", "\[Mu]0"}], "]"}], "]"}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Mu]0Calc", "=", 
+   RowBox[{"\[Mu]0Calc", "*", 
+    SuperscriptBox["10", "4"]}]}], 
+  RowBox[{"(*", 
+   RowBox[{
+    SuperscriptBox["cm", "2"], "/", 
+    SuperscriptBox["m", "2"]}], "*)"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{
+  "\"\<The intrinsic electronic mobility is \>\"", ",", "\[Mu]0Calc", ",", 
+   " ", "\"\< \!\(\*SuperscriptBox[\(cm\), \(2\)]\)/Vs\>\""}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.647107306846588*^9, 3.647107336836398*^9}, {
+  3.6471073809514914`*^9, 3.647107383824135*^9}, {3.64710742282274*^9, 
+  3.647107466207625*^9}, {3.6471074969307127`*^9, 3.647107559034174*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The intrinsic electronic mobility is \"\>", 
+   "\[InvisibleSpace]", "155.55063543922324`", 
+   "\[InvisibleSpace]", "\<\" \\!\\(\\*SuperscriptBox[\\(cm\\), \
+\\(2\\)]\\)/Vs\"\>"}],
+  SequenceForm[
+  "The intrinsic electronic mobility is ", 155.55063543922324`, 
+   " \!\(\*SuperscriptBox[\(cm\), \(2\)]\)/Vs"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.647107513878605*^9, 3.647107559743166*^9}, 
+   3.647108072588187*^9, 3.647108148636421*^9, 3.647108199194476*^9},
+ Background->GrayLevel[0.85]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Lorentz Number from Chemical Potential", "Subsection",
+ CellChangeTimes->{{3.647105684826469*^9, 3.647105707308263*^9}}],
+
+Cell[TextData[{
+ StyleBox["Recall that the ",
+  FontSize->16],
+ StyleBox["Lorentz number (L) ",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox["is defined in terms of the ",
+  FontSize->16],
+ StyleBox["chemical potential (\[Eta])",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" and the ",
+  FontSize->16],
+ StyleBox["Fermi integral (F)",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" as",
+  FontSize->16]
+}], "Text",
+ CellChangeTimes->{{3.64709102106175*^9, 3.647091021948144*^9}, {
+  3.647091080693645*^9, 3.64709118404953*^9}, {3.647093255238982*^9, 
+  3.647093288901333*^9}, {3.6470933278543787`*^9, 3.647093394900157*^9}, {
+  3.647093471619975*^9, 3.647093504946855*^9}, {3.6471003060801983`*^9, 
+  3.647100329853668*^9}, {3.647100367916483*^9, 3.647100480855365*^9}, {
+  3.647100639826672*^9, 3.647100664138228*^9}, {3.647100873681419*^9, 
+  3.6471010368269444`*^9}, {3.647101216374881*^9, 3.6471012399809437`*^9}, {
+  3.647101274348948*^9, 3.647101301778636*^9}, {3.647101687021575*^9, 
+  3.647101700396119*^9}, {3.647102538380013*^9, 3.647102588417457*^9}, {
+  3.647105600773965*^9, 3.647105605044519*^9}, {3.6471057111083393`*^9, 
+  3.647105720228109*^9}, {3.647105876296144*^9, 3.647105911238614*^9}, {
+  3.647606759680676*^9, 3.647606759749131*^9}, {3.647606808803192*^9, 
+  3.647606809162779*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"L", "[", 
+    RowBox[{"\[Lambda]_", ",", "\[Eta]_"}], "]"}], ":=", " ", 
+   RowBox[{
+    SuperscriptBox[
+     RowBox[{"(", 
+      FractionBox["k", "q"], ")"}], "2"], 
+    FractionBox[
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"1.5", "+", "\[Lambda]"}], ")"}], 
+       RowBox[{"(", 
+        RowBox[{"3.5", "+", "\[Lambda]"}], ")"}], 
+       RowBox[{"F", "[", 
+        RowBox[{
+         RowBox[{"0.5", "+", "\[Lambda]"}], ",", "\[Eta]"}], "]"}], 
+       RowBox[{"F", "[", 
+        RowBox[{
+         RowBox[{"2.5", "+", "\[Lambda]"}], ",", "\[Eta]"}], "]"}]}], "-", 
+      RowBox[{
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"2.5", "+", "\[Lambda]"}], ")"}], "2"], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"F", "[", 
+          RowBox[{
+           RowBox[{"1.5", "+", "\[Lambda]"}], ",", "\[Eta]"}], "]"}], ")"}], 
+        "2"]}]}], 
+     RowBox[{"(", 
+      RowBox[{
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1.5", "+", "\[Lambda]"}], ")"}], "2"], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"F", "[", 
+          RowBox[{
+           RowBox[{"0.5", "+", "\[Lambda]"}], ",", "\[Eta]"}], "]"}], ")"}], 
+        "2"]}], ")"}]]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.64710580964834*^9, 3.6471058687533712`*^9}}],
+
+Cell[TextData[{
+ StyleBox["Therefore, the ",
+  FontSize->16],
+ StyleBox["Lorentz number (L)",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" can be caculated from the ",
+  FontSize->16],
+ StyleBox["Seebeck coefficient (\[Alpha])",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[".",
+  FontSize->16]
+}], "Text",
+ CellChangeTimes->{{3.64709102106175*^9, 3.647091021948144*^9}, {
+  3.647091080693645*^9, 3.64709118404953*^9}, {3.647093255238982*^9, 
+  3.647093288901333*^9}, {3.6470933278543787`*^9, 3.647093394900157*^9}, {
+  3.647093471619975*^9, 3.647093504946855*^9}, {3.6471003060801983`*^9, 
+  3.647100329853668*^9}, {3.647100367916483*^9, 3.647100480855365*^9}, {
+  3.647100639826672*^9, 3.647100664138228*^9}, {3.647100873681419*^9, 
+  3.6471010368269444`*^9}, {3.647101216374881*^9, 3.6471012399809437`*^9}, {
+  3.647101274348948*^9, 3.647101301778636*^9}, {3.647101687021575*^9, 
+  3.647101700396119*^9}, {3.647102538380013*^9, 3.647102588417457*^9}, {
+  3.647105600773965*^9, 3.647105605044519*^9}, {3.6471057111083393`*^9, 
+  3.647105720228109*^9}, {3.647105876296144*^9, 3.6471059543923388`*^9}, {
+  3.647606777236473*^9, 3.6476068333391657`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"LCalc", "=", 
+   RowBox[{"L", "[", 
+    RowBox[{"\[Lambda]", ",", "\[Eta]Calc"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{
+  "\"\<The Lorentz number is \>\"", ",", "LCalc", ",", " ", 
+   "\"\< W\[CapitalOmega]/\!\(\*SuperscriptBox[\(K\), \(2\)]\)\>\""}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.647105966904676*^9, 3.647105973640052*^9}, {
+  3.647106006680914*^9, 3.647106051853999*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The Lorentz number is \"\>", "\[InvisibleSpace]", 
+   "1.825094068329372`*^-8", 
+   "\[InvisibleSpace]", "\<\" \
+W\[CapitalOmega]/\\!\\(\\*SuperscriptBox[\\(K\\), \\(2\\)]\\)\"\>"}],
+  SequenceForm[
+  "The Lorentz number is ", 1.825094068329372*^-8, 
+   " W\[CapitalOmega]/\!\(\*SuperscriptBox[\(K\), \(2\)]\)"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.647106028352366*^9, 3.6471060526272707`*^9}, 
+   3.647108076301066*^9, 3.647108149153335*^9, 3.647108199841077*^9},
+ Background->GrayLevel[0.85]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Electronic/Lattice Thermal Conductivity from Lorentz Number", \
+"Subsection",
+ CellChangeTimes->{{3.647106088180435*^9, 3.647106096250454*^9}, {
+  3.647106485075283*^9, 3.64710648608329*^9}}],
+
+Cell[TextData[{
+ StyleBox["We can divide the ",
+  FontSize->16],
+ StyleBox["total thermal conductivity (\[Kappa])",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" into ",
+  FontSize->16],
+ StyleBox["electronic (",
+  FontSize->16,
+  FontWeight->"Bold"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Kappa]", "e"], TraditionalForm]],
+  FontWeight->"Bold"],
+ StyleBox[") ",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox["and ",
+  FontSize->16],
+ StyleBox["lattice (",
+  FontSize->16,
+  FontWeight->"Bold"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Kappa]", "l"], TraditionalForm]],
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[") ",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox["contributions. The ",
+  FontSize->16],
+ StyleBox["electronic thermal conductivity",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" ",
+  FontSize->16],
+ StyleBox["(",
+  FontSize->16,
+  FontWeight->"Bold"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Kappa]", "e"], TraditionalForm]],
+  FontWeight->"Bold"],
+ StyleBox[")",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" can be calculated from the ",
+  FontSize->16],
+ StyleBox["electronic conductivity (\[Sigma])",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[", the ",
+  FontSize->16],
+ StyleBox["Lorentz number (L)",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[", and ",
+  FontSize->16],
+ StyleBox["temperature (T)",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[".",
+  FontSize->16]
+}], "Text",
+ CellChangeTimes->{{3.64709102106175*^9, 3.647091021948144*^9}, {
+  3.647091080693645*^9, 3.64709118404953*^9}, {3.647093255238982*^9, 
+  3.647093288901333*^9}, {3.6470933278543787`*^9, 3.647093394900157*^9}, {
+  3.647093471619975*^9, 3.647093504946855*^9}, {3.6471003060801983`*^9, 
+  3.647100329853668*^9}, {3.647100367916483*^9, 3.647100480855365*^9}, {
+  3.647100639826672*^9, 3.647100664138228*^9}, {3.647100873681419*^9, 
+  3.6471010368269444`*^9}, {3.647101216374881*^9, 3.6471012399809437`*^9}, {
+  3.647101274348948*^9, 3.647101301778636*^9}, {3.647101687021575*^9, 
+  3.647101700396119*^9}, {3.647102538380013*^9, 3.647102588417457*^9}, {
+  3.647105600773965*^9, 3.647105605044519*^9}, {3.6471057111083393`*^9, 
+  3.647105720228109*^9}, {3.647105876296144*^9, 3.647105911238614*^9}, {
+  3.647106103348027*^9, 3.6471062412371264`*^9}, {3.647606861228147*^9, 
+  3.647606904894923*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[Kappa]EleCalc", "=", 
+   RowBox[{"LCalc", "*", "\[Sigma]Exp", "*", "T"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{
+  "\"\<The electronic contribution to thermal conductivity is \>\"", ",", 
+   "\[Kappa]EleCalc", ",", " ", "\"\< W/mK\>\""}], "]"}]}], "Input",
+ CellChangeTimes->{{3.647106260419194*^9, 3.647106273718585*^9}, {
+  3.647106335392943*^9, 3.647106336946303*^9}, {3.647106410793056*^9, 
+  3.647106442555035*^9}, {3.647106505516279*^9, 3.6471065187767267`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The electronic contribution to thermal conductivity is \"\>", 
+   "\[InvisibleSpace]", "0.10529388855746377`", 
+   "\[InvisibleSpace]", "\<\" W/mK\"\>"}],
+  SequenceForm[
+  "The electronic contribution to thermal conductivity is ", 
+   0.10529388855746377`, " W/mK"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.647106443095333*^9, {3.647106506167571*^9, 3.647106519112327*^9}, 
+   3.647108078524349*^9, 3.647108149267466*^9, 3.647108199996737*^9},
+ Background->GrayLevel[0.85]]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["The difference between the ",
+  FontSize->16],
+ StyleBox["total thermal conductivity (\[Kappa])",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" and the ",
+  FontSize->16],
+ StyleBox["electronic thermal conductivity (",
+  FontSize->16,
+  FontWeight->"Bold"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Kappa]", "e"], TraditionalForm]],
+  FontWeight->"Bold"],
+ StyleBox[")",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[" is the ",
+  FontSize->16],
+ StyleBox["lattice thermal conductivity (",
+  FontSize->16,
+  FontWeight->"Bold"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Kappa]", "l"], TraditionalForm]],
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[")",
+  FontSize->16,
+  FontWeight->"Bold"],
+ StyleBox[".",
+  FontSize->16]
+}], "Text",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQBmIQffvnQk03ndeORuH7wHS4kZghiD4wldEORO9b+tzB
+HUjvuC7jCqKFwn97gmixczFBIPratc/RIHqxj1wCiP4zwWmTF5B2CLTeCqKv
+BP/dCaLV4qVPgGjJkl+3QXRsDst9EK1/zvQniA4pm8XrDaTZ/nOrgOgnyf/V
+QPRULW9tED3t1Q49EL1vw4M4EM20ticBRAtq+pwE0eeje8+D6KAjEh6+QHpz
+zkIw3VL+OBREr/ZhDwfRzFWdWSB616LneSCaS/l1G4jumqY+A0Qz/uCZC6Lv
+tWkuBtGLlfwFnXRfO06QmyoKogEHL4aQ
+  "]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[Kappa]LatCalc", "=", 
+   RowBox[{"\[Kappa]User", "-", "\[Kappa]EleCalc"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{
+  "\"\<The lattice contribution to thermal conductivity is \>\"", ",", 
+   "\[Kappa]LatCalc", ",", " ", "\"\< W/mK\>\""}], "]"}]}], "Input",
+ CellChangeTimes->{{3.647106331619555*^9, 3.6471063581293287`*^9}, {
+  3.6471063925210533`*^9, 3.647106395183713*^9}, {3.6471064519519653`*^9, 
+  3.647106462389619*^9}, {3.6471065045734987`*^9, 3.647106517191835*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The lattice contribution to thermal conductivity is \"\>", 
+   "\[InvisibleSpace]", "0.8957061114425361`", 
+   "\[InvisibleSpace]", "\<\" W/mK\"\>"}],
+  SequenceForm[
+  "The lattice contribution to thermal conductivity is ", 0.8957061114425361, 
+   " W/mK"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.647106457223825*^9, 3.647106462623664*^9}, {
+   3.6471065088718452`*^9, 3.647106520527486*^9}, 3.647108080627049*^9, 
+   3.6471081492893677`*^9, 3.647108200016551*^9},
+ Background->GrayLevel[0.85]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["SUMMARY OF RESULTS",
+ FontSize->24]], "Section",
+ CellChangeTimes->{{3.647107595047595*^9, 3.647107596054093*^9}, {
+  3.647607002001484*^9, 3.6476070050575533`*^9}},
+ TextAlignment->Center],
+
+Cell[TextData[StyleBox["This is a summary of the analysis",
+ FontSize->16]], "Text",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQAWIQffvnQk03ndeORuH7wHS4kZghiD4wldEORO9b+tzB
+HUjvuC7jCqKFwn97gmixczFBIPratc/RIHqxj1wCiP4zwWmTF5B2CLTeCqKv
+BP/dCaLV4qVPgGjJkl+3QXRsDst9EK1/zvQniA4pm8XrDaTZ/nOrgOgnyf/V
+QPRULW9tED3t1Q49EL1vw4M4EM20ticBRAtq+pwE0eeje8+D6KAjEh6+QHpz
+zkIw3VL+OBREr/ZhDwfRzFWdWSB616LneSCaS/l1G4jumqY+A0Qz/uCZC6Lv
+tWkuBtFV9f/q/YB00pT+JhBd9mS6hJPua8ePxR8kQTQA7PeQUw==
+  "]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DataPrinter", "[", "1", "]"}]], "Input",
+ CellChangeTimes->{{3.647107971656547*^9, 3.647107973229241*^9}, {
+  3.647108083752976*^9, 3.647108084065813*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     InterpretationBox["\<\"The chemical potential:                \
+\\!\\(\\\"1.77\\\"\\)\"\>",
+      StringForm["The chemical potential:                ``", 
+       NumberForm[1.7706168125485846`, 3]],
+      Editable->False]},
+    {
+     InterpretationBox["\<\"The Lorenz number is:                  \
+\\!\\(\\\"1.825\\\" \[Times] 10\\^\\\"-8\\\"\\) W \[CapitalOmega] \
+\\!\\(\\*SuperscriptBox[\\(K\\), \\(-2\\)]\\)\"\>",
+      StringForm[
+      "The Lorenz number is:                  `` W \[CapitalOmega] \
+\!\(\*SuperscriptBox[\(K\), \(-2\)]\)", 
+       NumberForm[1.825094068329372*^-8, 4]],
+      Editable->False]},
+    {"\<\"Thermal conductivity components:\"\>"},
+    {
+     InterpretationBox["\<\"  Total thermal conductivity:          \
+\\!\\(\\\"1.001\\\"\\)    W/m K\"\>",
+      StringForm["  Total thermal conductivity:          ``    W/m K", 
+       NumberForm[1.001, 4]],
+      Editable->False]},
+    {
+     InterpretationBox["\<\"  Electronic contribution:             \
+\\!\\(\\\"0.1053\\\"\\)    W/m K\"\>",
+      StringForm["  Electronic contribution:             ``    W/m K", 
+       NumberForm[0.10529388855746377`, 4]],
+      Editable->False]},
+    {
+     InterpretationBox["\<\"  Lattice contribution:                \
+\\!\\(\\\"0.8957\\\"\\)     W/m K\"\>",
+      StringForm["  Lattice contribution:                ``     W/m K", 
+       NumberForm[0.8957061114425361, 4]],
+      Editable->False]},
+    {
+     InterpretationBox["\<\"Intrinsic mobility:                    \
+\\!\\(\\\"155.6\\\"\\)      \\!\\(\\*SuperscriptBox[\\(cm\\), \
+\\(2\\)]\\)/Vs\"\>",
+      StringForm[
+      "Intrinsic mobility:                    ``      \
+\!\(\*SuperscriptBox[\(cm\), \(2\)]\)/Vs", 
+       NumberForm[155.55063543922324`, 4]],
+      Editable->False]},
+    {
+     InterpretationBox["\<\"DOS effective mass:                    \
+\\!\\(\\\"0.2941\\\"\\)     me\"\>",
+      StringForm["DOS effective mass:                    ``     me", 
+       NumberForm[0.294068121971246, 4]],
+      Editable->False]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {{Automatic}}, "Rows" -> {{
+        GrayLevel[0.85], 
+        GrayLevel[1], 
+        GrayLevel[0.85], 
+        GrayLevel[1], 
+        GrayLevel[1], 
+        GrayLevel[1]}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Print",
+ CellChangeTimes->{3.647108084542273*^9, 3.6471082000562563`*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1278, 818},
+WindowMargins->{{Automatic, 46}, {Automatic, 0}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "Default.nb"]]}, Visible -> False, 
+  FrontEndVersion -> 
+  "10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, 2014)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 682, 18, 158, "Title"],
+Cell[CellGroupData[{
+Cell[1287, 44, 148, 3, 60, "Section"],
+Cell[1438, 49, 254, 5, 29, "Input"],
+Cell[1695, 56, 3109, 70, 267, "Input"],
+Cell[CellGroupData[{
+Cell[4829, 130, 132, 2, 28, "Input"],
+Cell[4964, 134, 2534, 63, 140, "Print"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[7547, 203, 205, 4, 46, "Section"],
+Cell[7755, 209, 2479, 73, 429, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10271, 287, 240, 4, 60, "Section"],
+Cell[10514, 293, 3040, 80, 326, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13591, 378, 284, 5, 60, "Section"],
+Cell[13878, 385, 373, 5, 33, "Text"],
+Cell[14254, 392, 2317, 65, 313, "Input"],
+Cell[16574, 459, 557, 17, 55, "Text"],
+Cell[17134, 478, 617, 17, 97, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17788, 500, 202, 4, 60, "Section"],
+Cell[17993, 506, 437, 7, 33, "Text"],
+Cell[18433, 515, 1871, 49, 276, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20341, 569, 258, 5, 60, "Section"],
+Cell[20602, 576, 831, 19, 57, "Text"],
+Cell[21436, 597, 5086, 114, 356, "Input"],
+Cell[26525, 713, 532, 8, 33, "Text"],
+Cell[CellGroupData[{
+Cell[27082, 725, 454, 10, 50, "Input"],
+Cell[27539, 737, 664, 13, 38, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28252, 756, 261, 5, 60, "Section"],
+Cell[28516, 763, 718, 10, 33, "Text"],
+Cell[CellGroupData[{
+Cell[29259, 777, 133, 1, 44, "Subsection"],
+Cell[29395, 780, 1207, 35, 55, "Text"],
+Cell[30605, 817, 1117, 28, 91, "Input"],
+Cell[31725, 847, 901, 21, 33, "Text"],
+Cell[32629, 870, 902, 26, 51, "Input"],
+Cell[33534, 898, 830, 11, 33, "Text"],
+Cell[CellGroupData[{
+Cell[34389, 913, 794, 20, 46, "Input"],
+Cell[35186, 935, 518, 9, 38, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35753, 950, 144, 1, 44, "Subsection"],
+Cell[35900, 953, 1900, 60, 57, "Text"],
+Cell[37803, 1015, 525, 15, 50, "Input"],
+Cell[38331, 1032, 1075, 25, 34, "Text"],
+Cell[CellGroupData[{
+Cell[39431, 1061, 832, 20, 46, "Input"],
+Cell[40266, 1083, 574, 13, 38, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40889, 1102, 267, 3, 44, "Subsection"],
+Cell[41159, 1107, 1657, 47, 121, "Text"],
+Cell[42819, 1156, 1077, 30, 91, "Input"],
+Cell[43899, 1188, 834, 26, 33, "Text"],
+Cell[CellGroupData[{
+Cell[44758, 1218, 1052, 28, 73, "Input"],
+Cell[45813, 1248, 556, 12, 40, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[46418, 1266, 126, 1, 44, "Subsection"],
+Cell[46547, 1269, 1320, 31, 33, "Text"],
+Cell[47870, 1302, 1360, 43, 57, "Input"],
+Cell[49233, 1347, 1163, 25, 33, "Text"],
+Cell[CellGroupData[{
+Cell[50421, 1376, 463, 12, 52, "Input"],
+Cell[50887, 1390, 559, 12, 39, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[51495, 1408, 197, 3, 44, "Subsection"],
+Cell[51695, 1413, 2355, 78, 56, "Text"],
+Cell[CellGroupData[{
+Cell[54075, 1495, 538, 11, 46, "Input"],
+Cell[54616, 1508, 537, 12, 38, "Print"]
+}, Open  ]],
+Cell[55168, 1523, 1163, 41, 34, "Text"],
+Cell[CellGroupData[{
+Cell[56356, 1568, 542, 11, 46, "Input"],
+Cell[56901, 1581, 557, 12, 38, "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[57519, 1600, 213, 4, 60, "Section"],
+Cell[57735, 1606, 485, 9, 33, "Text"],
+Cell[CellGroupData[{
+Cell[58245, 1619, 179, 3, 28, "Input"],
+Cell[58427, 1624, 2515, 63, 140, "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
